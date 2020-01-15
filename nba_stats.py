@@ -1,45 +1,47 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
 import requests
+from selenium import webdriver
+import re
+import time
 
-headers = {'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com', 'x-rapidapi-key': '29234948damsh7f710123ce5be4ap1d448bjsnfc10e145c960'}
+pd.set_option('display.max_columns', 30)
 
-years_list = ['2015', '2016', '2017', '2018']
-league_name = 'standard'
 
-# Get games by league and year
-def get_gameId(years, league, parameters):
-    all_games = {}
-    for year in years:
-        games = []
-        base_url = 'https://api-nba-v1.p.rapidapi.com/games/league/' + league + '/' + year
-        response = requests.get(base_url, headers=parameters)
-        data = response.json()
-        each_game = data['api']['games']
-        for match in each_game:
-            gameId = match['gameId']
-            games.append(gameId)
-        all_games[year] = games
-    return all_games
+seasons = ['1996-97', '1997-98', '1999-00', '2000-01', '2001-02', '2002-03', '2003-04', '2004-05', '2005-06', '2006-07', '2007-08',
+            '2008-09', '2009-10', '2010-11', '2011-12', '2012-13', '2013-14', '2014-15', '2015-16', '2016-17', '2017-18', '2018-19']
 
-# get_gameId(years_list, league_name, headers)
 
-gameId_dict = get_gameId(years_list, league_name, headers)
+def get_data(seasons_list):
+    statistics = pd.DataFrame()
+    for season in seasons_list:
+        url = 'https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1&Season=' + season + '&SeasonType=Regular%20Season&PerMode=Totals'
+        driver = webdriver.Chrome(r"/Users/Robert/Downloads/chromedriver")
+        driver.get(url)
+        time.sleep(3)
+        table = driver.find_element_by_class_name('nba-stat-table__overflow')
+        remove_endline = table.text.split('\n')
+        row_to_string = ' '.join(remove_endline)
+        split_lines = re.sub(r'\s\d{1,2}\s([A-Z])', r'\n\1', row_to_string)
+        separate_teams = split_lines.split('\n')
+        table_list = []
+        for row in separate_teams:
+            split_stats = row.split()
+            table_list.append(split_stats[-27:])
+        df = pd.DataFrame.from_records(table_list[1:], columns = table_list[0])
+        df.insert(0, 'SEASON', season)
+        statistics = pd.concat([statistics, df], ignore_index = True)
+        driver.close()
+    return statistics
 
-def get_statistics(years, parameters):
-    df_list = []
-    for season in gameId_dict:
-        game_stats = []
-        for id in gameId_dict[season]:
-            base_url2 = 'https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/' + id
-            response2 = requests.get(base_url2, headers=parameters)
-            data2 = response.json()
-            statistics = data2['api']['statistics']
-            for team_stats in statistics:
-                game_stats.append(team_stats)
-        df = pd.DataFrame(game_stats)
-        df_list.append(df)
-        return df_list
+statistics_df = get_data(seasons)
+statistics_df
 
-stats_dfs = get_statistics(years_list, headers)
+statistics_df.to_csv('nba_statistics.csv', index=False)
+stats_df = pd.read_csv('nba_statistics.csv')
+
+plt.figure(figsize=(30,40))
+sns.heatmap(stats_df.corr(), cmap="YlGnBu", annot=True)
