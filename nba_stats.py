@@ -18,7 +18,7 @@ seasons = ['1996-97', '1997-98', '1999-00', '2000-01', '2001-02', '2002-03', '20
 def get_data(seasons_list):
     statistics = pd.DataFrame()
     for season in seasons_list:
-        url = 'https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1&Season=' + season + '&SeasonType=Regular%20Season&PerMode=Totals'
+        url = 'https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1&Season=' + season + '&SeasonType=Regular%20Season'
         driver = webdriver.Chrome(r"/Users/Robert/Downloads/chromedriver")
         driver.get(url)
         time.sleep(3)
@@ -40,8 +40,9 @@ def get_data(seasons_list):
 statistics_df = get_data(seasons)
 statistics_df
 
-statistics_df.to_csv('nba_statistics.csv', index=False)
-stats_df = pd.read_csv('nba_statistics.csv')
+statistics_df.to_csv('nba_statistics_pergame.csv', index=False)
+stats_df = pd.read_csv('nba_statistics_pergame.csv')
+stats_df
 
 plt.figure(figsize=(30,40))
 sns.heatmap(stats_df.corr(), cmap="YlGnBu", annot=True)
