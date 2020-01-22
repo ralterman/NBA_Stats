@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
-plt.style.use('seaborn')
 import seaborn as sns
+plt.style.use('seaborn')
 import requests
 from selenium import webdriver
 import re
@@ -72,12 +72,12 @@ log_cols = ['PTS', 'FGM', 'FG_PERCENT', 'THREE_PM', 'THREE_PA', 'FTA', 'OREB', '
 
 
 # Get log values for those specific columns
-for cols in log_cols:
+for cols in stats_df[log_cols]:
     stats_df[cols] = np.log(stats_df[cols])
- stats_df
+stats_df
 
 # Normalized all values (including log transformed ones)
-for col in x_cols:
+for col in stats_df[x_cols]:
     stats_df[col] = (stats_df[col] - stats_df[col].mean())/stats_df[col].std()
 stats_df
 
@@ -94,16 +94,16 @@ pd.plotting.scatter_matrix(stats_df.iloc[:, 5:-2], figsize=(40,30))
 
 
 
-# Summary with ALL values log transformed for comparison
-predictors = '+'.join(x_cols)
+# Summary with ALL values with NO transformations for comparison
+predictors = '+'.join(stats_df[x_cols])
 formula = outcome + '~' + predictors
 model = ols(formula=formula, data=stats_df).fit()
 model.summary()
 
 
 
-# Summary with ALL values with NO transformations for comparison
-predictors = '+'.join(x_cols)
+# Summary with ALL values log transformed for comparison
+predictors = '+'.join(stats_df[x_cols])
 formula = outcome + '~' + predictors
 model = ols(formula=formula, data=stats_df).fit()
 model.summary()
@@ -111,12 +111,12 @@ model.summary()
 
 # -------------------------------------------------------------------------------------------------------------------------------------
 
+
 # Summary with values that we decided to do log transformations on, as well as the ones we kept as is (i.e., potential ideal model)
 predictors = '+'.join(x_cols)
 formula = outcome + '~' + predictors
 model = ols(formula=formula, data=stats_df).fit()
 model.summary()
-
 
 
 # Initital refinement of variables
@@ -152,6 +152,8 @@ stats_df[new_xcols2].corr()
 
 # **Model equation:   WIN_PERCENT = 0.5000 - 0.0330ln(PTS) + 0.0587(FTM) + 0.0186ln(OREB) + 0.0543ln(DREB) + 0.0376ln(AST) - 0.0480(TOV) + 0.0408(STL) + 0.0186ln(BLK) - 0.0639ln(BLKA) - 0.0107(PF)
 
+
+# From F-test, since we have a very low p-value, we can conclude that our model proves a better fit than the intercept-only model
 
 # Create qq plot of residuals to check for normality
 fig = sm.graphics.qqplot(model.resid, dist=stats.norm, line='45', fit=True)
