@@ -1,13 +1,13 @@
-# Mod_4_Project
-Module 4 Final Project - NBA Win Percentage Prediction Modeling
+# NBA Win Percentage Predictor
+### _Multiple regression model predicting season win percentage of an NBA team based on its statistics_
 
-## Project Formalization:
-An analysis of NBA team statistics for the years 1996- 2019 with the goal of developing a model for predicting the team win percentage and in so doing, the likelihood of winning an NBA title. Do to time constraints we used the NBA's basic stats; the advanced stats would have greater predictive value.  Nonethless, those may be suitable for a more indepth project at a later time.
+## Goal
+Create a model to predict final season win percentage for an NBA team based on its current per-game statistics
 
-
-## Project Team:
-Rob Alterman & Raphael Krantz
-
-## Project Stages
-- Web Scraping https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1
-
+## Data Cleaning/Preprocessing
+__NBA basic statistics for the years 1996-2019__
+1. Used Selenium to scrape [stats.nba.com](https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1 "NBA Stats Official Site")
+  * Removed endline character and team rank from each row (using a regular expression); kept only columns of interest
+  * Created dataframe from list of lists, where the first sub-list was the column names and the rest of the sub-lists were one team's         stats from that season
+  * Inserted 'Season' column for each row to keep track of NBA season
+  * Concatenated each season's stats to the previous season
