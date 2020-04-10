@@ -6,6 +6,7 @@ Create a model to predict final season win percentage for an NBA team based on i
 
 ## Data Cleaning/Preprocessing
 __Basic NBA statistics for the years 1996-2019__
+
 __Variables: WIN%, PTS, FGM, FGA, FG%, 3PM, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB, REB, AST, TOV, STL, BLK, BLKA, PF__
 1. Used Selenium to scrape [stats.nba.com](https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1 "NBA Stats Official Site")
    * Removed endline character and team rank from each row (using a regular expression); kept only columns of interest
