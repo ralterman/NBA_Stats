@@ -13,8 +13,12 @@ __Basic NBA statistics for the years 1996-2019__
    * Concatenated each season's stats to the previous season
    * Renamed columns that contained non-alphabetic characters
 2. Log Transformations and Normalization
-   * Ran log transformations using NumPy on variables deemed necessary due to the distribution shape of the variable
-    * Can possibly be explained by more recent trends in basketball, i.e. dramatic increase in three-point shots since 2014
+   * Ran log transformations using NumPy on variables deemed necessary due to the distribution shape of the variable (can possibly be          explained by more recent trends in basketball, i.e. dramatic increase in three-point shots since 2014)
    * Normalized all of the variables (including those that were log transformed) so that they would all be on the same scale given how          they differ
    
 ## Exploratory Data Analysis
+1. Correlation heatmap of basketball statistics
+  <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/heatmap.png"></p>
+
+2. Scatter matrix and histograms of the distribution shapes of all of the variables — normal vs. skewed (snippet of whole diagram)
+  <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/scatter_matrix.png"></p>
