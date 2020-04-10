@@ -56,7 +56,7 @@ __Variables: WIN%, PTS, FGM, FGA, FG%, 3PM, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB,
 1. Perfomed Scikit-Learn train/test split
 2. No need for Ridge/Lasso regularization since unpenalized linear regression was good — very low difference between error of trained        model and error of test model
 
-## Final Model:
+## Final Model
 * __R<sup>2</sup> = 0.558__
 * __MSE = 0.0108__
   <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/final_model.png"></p>
