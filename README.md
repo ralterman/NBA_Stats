@@ -38,7 +38,23 @@ __Variables: WIN%, PTS, FGM, FGA, FG%, 3PM, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB,
 
 5. Second Refinement
     * Removed one variable from each of the multicolinear pairs and ran OLS again
+    * __R<sup>2</sup> = 0.558__
     * P-values are all well below α = 0.05
     * Appears to no longer be multicolinearity between variables
-    * P(F-statistic) = 6.88e<sup>-107</sup>
+    * P(F-statistic) = 6.88e<sup>-107</sup>, can conclude that the model proves a better fit than the intercept-only model
     <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/ols_tables3.png"></p>
+
+## Assessing Refined Model
+1. Check for normal distribution with Q-Q plot
+  <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/qqplot.png"></p>
+
+2. Check for homoscedasticity with scatter plot of the error terms (should be random)
+  <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/homoscedasticity.png"></p>
+  
+## Testing the Model
+1. Perfomed Scikit-Learn train/test split
+2. __MSE = 0.0108__
+3. No need for Ridge/Lasso regularization since unpenalized linear regression was good — very low difference between error of trained        model and error of test model
+
+## Final Model:
+  <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/final_model.png"></p>
