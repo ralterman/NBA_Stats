@@ -83,11 +83,16 @@ stats_df
 
 
 # Create heatmap to investigate correlations between variables
-sns.heatmap(stats_df.corr())
+fig, ax = plt.subplots(figsize=(12,8))
+sns.heatmap(stats_df.corr(), ax=ax, cmap='YlGnBu')
+bottom, top = ax.get_ylim()
+ax.set_ylim(bottom + 0.5, top - 0.5)
+
 
 # View variable correlations just with WIN_PERCENT
 corr = stats_df.corr()
 abs(corr).sort_values(by = 'WIN_PERCENT', ascending = False)['WIN_PERCENT']
+
 
 # Create scatter matrix and histograms to see distribution shape of all variables (normal vs. skewed)
 pd.plotting.scatter_matrix(stats_df.iloc[:, 5:-2], figsize=(40,30))
