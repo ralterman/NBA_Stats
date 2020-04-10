@@ -2,7 +2,7 @@
 ### _Multiple regression model predicting season win percentage of an NBA team based on its statistics_
 
 ## Goal
-Create a model to predict final season win percentage for an NBA team based on its current per-game statistics
+Create a model to predict final season win percentage for an NBA team based on its current per-game statistics.
 
 ## Data Cleaning/Preprocessing
 __Basic NBA statistics for the years 1996-2019__
@@ -21,7 +21,7 @@ __Variables: WIN%, PTS, FGM, FGA, FG%, 3PM, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB,
 1. Correlation heatmap of basketball statistics
   <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/heatmap.png"></p>
 
-2. Scatter matrix and histograms of the distribution shapes of all of the variables — normal vs. skewed (snippet of whole diagram)
+2. Scatter matrix and histograms of the distribution shapes of all of the variables — normal vs. skewed (small snippet of diagram)
   <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/scatter_matrix.png"></p>
 
 ## OLS Tables
@@ -38,7 +38,7 @@ __Variables: WIN%, PTS, FGM, FGA, FG%, 3PM, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB,
 
 5. Second Refinement
     * Removed one variable from each of the multicolinear pairs and ran OLS again
-    * __R<sup>2</sup> = 0.558__
+    * R<sup>2</sup> = 0.558
     * P-values are all well below α = 0.05
     * Appears to no longer be multicolinearity between variables
     * P(F-statistic) = 6.88e<sup>-107</sup>, can conclude that the model proves a better fit than the intercept-only model
@@ -53,8 +53,9 @@ __Variables: WIN%, PTS, FGM, FGA, FG%, 3PM, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB,
   
 ## Testing the Model
 1. Perfomed Scikit-Learn train/test split
-2. __MSE = 0.0108__
-3. No need for Ridge/Lasso regularization since unpenalized linear regression was good — very low difference between error of trained        model and error of test model
+2. No need for Ridge/Lasso regularization since unpenalized linear regression was good — very low difference between error of trained        model and error of test model
 
 ## Final Model:
+* __R<sup>2</sup> = 0.558__
+* __MSE = 0.0108__
   <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/final_model.png"></p>
