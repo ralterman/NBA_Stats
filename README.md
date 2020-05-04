@@ -6,7 +6,7 @@ Project Partner: [Raphael Krantz](https://github.com/Vajrasamaya "Raphael Krantz
 Create a model to predict final season win percentage for an NBA team based on its current per-game statistics.
 
 ## File Directory
-* [nba_stats.py](https://github.com/ralterman/nba_win_percentage_predictor/blob/master/nba_stats.py "nba_stats.py File") - full code for       multiple regression model
+* [nba_stats.py](https://github.com/ralterman/nba_win_percentage_predictor/blob/master/nba_stats.py "nba_stats.py File") - full code for     multiple regression model
 * [nba_statistics_pergame.csv](https://github.com/ralterman/nba_win_percentage_predictor/blob/master/nba_statistics_pergame.csv             "nba_statistics_pergame.csv File") - CSV file of scraped NBA per-game stats from [stats.nba.com](https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1 "NBA Stats Official Site") from the years 1996-2019
 
 ## Data Cleaning/Preprocessing
