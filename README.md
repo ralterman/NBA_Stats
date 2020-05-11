@@ -65,3 +65,7 @@ __Variables: WIN%, PTS, FGM, FGA, FG%, 3PM, 3PA, 3P%, FTM, FTA, FT%, OREB, DREB,
 * __R<sup>2</sup> = 0.558__
 * __MSE = 0.0108__
   <p align="center"><img src="https://github.com/ralterman/nba_win_percentage_predictor/blob/master/images/final_model.png"></p>
+
+---
+
+### Check out my blog on [Medium](https://towardsdatascience.com/predicting-nba-win-percentage-84148ae8d3e6?source=friends_link&sk=60b953ba634f715b65e11753753d9693 "Predicting NBA Win Percentage Medium Blog") about this project! 
