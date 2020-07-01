@@ -2,6 +2,7 @@
 ### _Multiple regression model predicting season win percentage of an NBA team based on its statistics_
 Project Partner: [Raphael Krantz](https://github.com/Vajrasamaya "Raphael Krantz's GitHub")
 
+---
 ## Goal
 Create a model to predict final season win percentage for an NBA team based on its current per-game statistics.
 
